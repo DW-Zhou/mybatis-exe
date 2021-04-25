@@ -15,4 +15,14 @@ public interface UserService {
     List<User> findAllUsers();
 
     int inserUser(User user);
+
+    List<User> getUsersByConditionIf(User user);
+
+    List<User> getUsersByConditionChoose(User user);
+
+    int updateUserByConditionSet(User user);
+
+    List<User> getUsersByConditionForeach(List<Long> list);
+
+    void addAllUser(List<User> list);
 }

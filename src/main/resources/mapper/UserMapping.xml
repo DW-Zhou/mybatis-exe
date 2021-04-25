@@ -17,5 +17,89 @@
     <insert id="insertUser" parameterType="com.dengzhou.bean.User">
         insert user (user_name,address,color,country) values (#{username},#{address},#{color},#{country})
     </insert>
+
+    <select id="getUsersByConditionIf" resultMap="BaseResultMap">
+        select * from user
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and user_name like #{username}
+            </if>
+            <if test="color != null and color != ''">
+                and color like #{color}
+            </if>
+            <if test="address != null and address != ''">
+                and address like #{address}
+            </if>
+            <if test="country != null and country !=''">
+                and country like #{country}
+            </if>
+        </where>
+    </select>
+    <!--如果带了id就用id查，如果带了user_name就用username查，只会二选一-->
+    <select id="getUsersByConditionChoose" resultMap="BaseResultMap">
+        select * from user
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <when test="username != null and username != ''">
+                    user_name like #{username}
+                </when>
+                <otherwise>
+                   color = #{color}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <!--根据条件判断进行更新数据
+    <set>
+            <if test="username != null and username != ''">
+                user_name = #{username}
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address}
+            </if>
+        </set>
+    -->
+    <update id="updateUserByConditionSet">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username != null and username != ''">
+                user_name = #{username},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+        </trim>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <!--Collection :指定要遍历的集合
+                    list类型的参数会特殊处理封装在map中，map的key就是list
+                    item: 将遍历出的元素赋值给指定的变量
+                    separator: 表示每个元素之间的分隔符
+                    open：遍历出的结果拼接一个开始的字符
+                    index :索引,遍历list的时候是索引，
+                            遍历map的时候，表示的是map的key,item就是map的值-->
+    <select id="getUsersByConditionForeach" resultMap="BaseResultMap">
+        select * from user where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <insert id="addAllUser" parameterType="com.dengzhou.bean.User">
+        insert into user (user_name,address,color,country)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.username},#{item.address},#{item.color},#{item.country})
+        </foreach>
+    </insert>
 </mapper>
 

@@ -16,4 +16,14 @@ public class User {
     private String address;
     private String color;
     private String country;
+
+    public User() {
+    }
+
+    public User(String username, String address, String color, String country) {
+        this.username = username;
+        this.address = address;
+        this.color = color;
+        this.country = country;
+    }
 }

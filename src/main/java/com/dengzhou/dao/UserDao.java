@@ -12,4 +12,19 @@ public interface UserDao {
    List<User> findAll();
 
    int insertUser(User user);
+
+   /**
+    * @description: 携带了哪个字段查询条件就带上哪个字段的值
+    * @param user
+    * @return
+    */
+   List<User> getUsersByConditionIf(User user);
+
+   List<User> getUsersByConditionChoose(User user);
+
+   int updateUserByConditionSet(User user);
+
+   List<User> getUsersByConditionForeach(List<Long> list);
+
+   void addAllUser(List<User> list);
 }

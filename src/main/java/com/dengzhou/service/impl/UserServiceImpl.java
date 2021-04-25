@@ -29,4 +29,33 @@ public class UserServiceImpl implements UserService {
         int i = userDao.insertUser(user);
         return i;
     }
+
+    @Override
+    public List<User> getUsersByConditionIf(User user) {
+        List<User> usersByConditionIf = userDao.getUsersByConditionIf(user);
+        return usersByConditionIf;
+    }
+
+    @Override
+    public List<User> getUsersByConditionChoose(User user) {
+        List<User> users = userDao.getUsersByConditionChoose(user);
+        return users;
+    }
+
+    @Override
+    public int updateUserByConditionSet(User user) {
+        int i = userDao.updateUserByConditionSet(user);
+        return i;
+    }
+
+    @Override
+    public List<User> getUsersByConditionForeach(List<Long> list) {
+        List<User> usersByConditionForeach = userDao.getUsersByConditionForeach(list);
+        return usersByConditionForeach;
+    }
+
+    @Override
+    public void addAllUser(List<User> list) {
+        userDao.addAllUser(list);
+    }
 }
