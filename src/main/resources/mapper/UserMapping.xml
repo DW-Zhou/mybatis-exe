@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dengzhou.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.dengzhou.bean.User">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="username"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="color" jdbcType="VARCHAR" property="color"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="BaseResultMap" resultType="com.dengzhou.bean.User">
+        select * from user
+    </select>
+
+    <insert id="insertUser" parameterType="com.dengzhou.bean.User">
+        insert user (user_name,address,color,country) values (#{username},#{address},#{color},#{country})
+    </insert>
+</mapper>
+
