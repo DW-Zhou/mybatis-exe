@@ -10,3 +10,6 @@ mybatis:
   type-aliases-package: com.dengzhou.bean
   mapper-locations: classpath:mapper/*.xml
 
+logging:
+  level:
+    com.dengzhou.dao: debug

@@ -4,6 +4,7 @@ import com.dengzhou.bean.User;
 import com.dengzhou.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
@@ -103,5 +104,19 @@ public class BaseController {
         }catch (Exception e){
             return "批量插入失败!";
         }
+    }
+
+    /**
+     * @Desption: @Transactional
+     * springboot + mybatis 不加事务注解，一级缓存失效
+     * 加上，则一级缓存生效
+     *
+     */
+    @PostMapping("/selectid")
+    public String selectByCache(@Param("id") Long id){
+        User user1 = userService.getUserById(id);
+        User user2 = userService.getUserById(id);
+        System.out.println(user1 == user2);
+        return user1.toString();
     }
 }

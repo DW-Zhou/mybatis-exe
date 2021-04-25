@@ -9,9 +9,15 @@
         <result column="country" jdbcType="VARCHAR" property="country"/>
     </resultMap>
 
+    <!--抽取可重用sql-->
+    <sql id="basesql">
+        user_name,address,color,country
+    </sql>
 
     <select id="findAll" resultMap="BaseResultMap" resultType="com.dengzhou.bean.User">
-        select * from user
+        select
+        <include refid="basesql"/>
+        from user
     </select>
 
     <insert id="insertUser" parameterType="com.dengzhou.bean.User">
@@ -101,5 +107,14 @@
             (#{item.username},#{item.address},#{item.color},#{item.country})
         </foreach>
     </insert>
+
+    <select id="getUserById" resultMap="BaseResultMap">
+        select
+        <include refid="basesql"/>
+        from user
+        <where>
+            id = #{id}
+        </where>
+    </select>
 </mapper>
 

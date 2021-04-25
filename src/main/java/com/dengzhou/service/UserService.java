@@ -25,4 +25,6 @@ public interface UserService {
     List<User> getUsersByConditionForeach(List<Long> list);
 
     void addAllUser(List<User> list);
+
+    User getUserById(Long id);
 }

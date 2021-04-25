@@ -58,4 +58,10 @@ public class UserServiceImpl implements UserService {
     public void addAllUser(List<User> list) {
         userDao.addAllUser(list);
     }
+
+    @Override
+    public User getUserById(Long id) {
+        User user = userDao.getUserById(id);
+        return user;
+    }
 }

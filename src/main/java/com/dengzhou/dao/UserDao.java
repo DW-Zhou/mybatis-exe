@@ -1,6 +1,7 @@
 package com.dengzhou.dao;
 
 import com.dengzhou.bean.User;
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,6 @@ public interface UserDao {
    List<User> getUsersByConditionForeach(List<Long> list);
 
    void addAllUser(List<User> list);
+
+   User getUserById(@Param("id") Long id);
 }
