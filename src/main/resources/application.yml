@@ -2,13 +2,18 @@ server:
   port: 8080
 spring:
   datasource:
-    username:
+    username: root
     password:
     url: jdbc:mysql://localhost:3306/exe_mybatis?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 mybatis:
   type-aliases-package: com.dengzhou.bean
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    lazy-loading-enabled: true
+    # 开启全局的二级缓存，显示的指定，即使是默认开启，最好显示指定，防止版本更新带来的问题，避免不必要的麻烦，反正快的很
+    cache-enabled: true
 
 logging:
   level:

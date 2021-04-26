@@ -2,6 +2,8 @@ package com.dengzhou.bean;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @program: DZEXEDEMO
  * @description: 实体类
@@ -10,7 +12,7 @@ import lombok.Data;
  **/
 
 @Data
-public class User {
+public class User implements Serializable {
     private Long id;
     private String username;
     private String address;
